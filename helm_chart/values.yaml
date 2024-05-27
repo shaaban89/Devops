@@ -1,0 +1,6 @@
+replicaCount: 1
+image:
+  repository: shaaban7/shaaban
+port: 80
+name: wordpress-dev
+domain: dev.exahost.com
