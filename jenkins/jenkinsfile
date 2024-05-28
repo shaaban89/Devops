@@ -89,19 +89,19 @@ node("wordpress-dev") {
     }
 }
 
-def notifyBuild(String buildStatus = 'STARTED') {
+//def notifyBuild(String buildStatus = 'STARTED') {
     // build status of null means successful
-    buildStatus = buildStatus ?: 'SUCCESSFUL'
+  //  buildStatus = buildStatus ?: 'SUCCESSFUL'
     // Default values
-    def colorCode = '#FF0000'
-    def subject = "${buildStatus}: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'"
-    def summary = "${subject} (${env.BUILD_URL})"
+    //def colorCode = '#FF0000'
+    //def subject = "${buildStatus}: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'"
+    //def summary = "${subject} (${env.BUILD_URL})"
     // Override default values based on build status
-    if (buildStatus == 'STARTED') {
-        colorCode = '#FFFF00'
-    } else if (buildStatus == 'SUCCESSFUL') {
-        colorCode = '#00FF00'
-    }
+    //if (buildStatus == 'STARTED') {
+        //colorCode = '#FFFF00'
+    //} else if (buildStatus == 'SUCCESSFUL') {
+        //colorCode = '#00FF00'
+    //}
     // Send notifications
-    slackSend(color: colorCode, message: summary)
-}
+    //slackSend(color: colorCode, message: summary)
+//}
