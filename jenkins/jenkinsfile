@@ -1,0 +1,149 @@
+def branchName      =  "main"
+def gitUrl          =  "git@github.com:shaaban89/Devops.git"
+def gitUrlCode      =  "git@github.com:shaaban89/msadnet"
+def serviceName     =  "wordpress-dev"
+def EnvName         =  "wordpress-env"
+def imageTag        =  "${EnvName}-${BUILD_NUMBER}"
+def registryUrl     =  "https://registry.hub.docker.com"
+def k8sContext      =  "wordpress-dev"
+def namespace       =  "dev"
+def helmDir         =  "/home/dev/Devops/helm_charts/"
+def dockerfile      =  "Dockerfile"
+
+node ("etmanaplus") {
+
+   
+    try {
+        // Notification for build start
+        notifyBuild('STARTED')
+
+
+        // Additional stages can be added here
+
+    } catch (Exception e) {
+        // Handle any exceptions that occur during the stages
+        echo "Caught an exception: ${e.message}"
+        currentBuild.result = 'FAILURE'
+        notifyBuild('FAILED')
+    } finally {
+        // Ensure final notification is sent
+        notifyBuild(currentBuild.result ?: 'SUCCESSFUL')
+    }
+
+
+
+        stage('Prepare Workspace') {
+            // Change the ownership of the workspace to the 'dev' user
+            sh "sudo chown -R dev:dev ${env.WORKSPACE}"
+        }
+    
+    stage("Setup parameters") {
+      script {
+        properties([
+          parameters([
+            string(
+            defaultValue: 'main',
+            name: 'branchName',
+            trim: true)
+          ])
+        ])
+      }
+     }
+    
+
+    stage ("Get the app code") {
+        // Run all commands as the 'dev' user
+        sh """
+        sudo -u dev sh -c '
+            whoami
+            cd /home/dev && git pull
+            cd ${env.WORKSPACE}
+            git rev-parse --resolve-git-dir /home/dev/workspace/Devops/.git
+            git config remote.origin.url https://github.com/shaaban89/Devops.git
+            git rev-parse origin/main
+            git config core.sparsecheckout
+            git checkout -f  364370c00e1969be016629b957e315799544e05b
+            git rev-list --no-walk 364370c00e1969be016629b957e315799544e05b 
+            // cp /home/dev/Devops/${EnvName}/docker/${serviceName}/Dockerfile ${dockerfile}
+            pwd
+            ls -la
+        '
+        """
+    }
+
+        
+  //  stage ("Get the app code")
+  //  {
+    //   sh 'whoami'
+      // sh 'cd /home/dev/Devops && sudo -u dev  git pull'
+//       checkout([$class: 'GitSCM', branches: [[name: "${branchName}"]] , extensions: [], userRemoteConfigs: [[ url: "${gitUrlCode}"]]])  
+  //     sh("cp /home/dev/Devops/${EnvName}/docker/${serviceName}/Dockerfile ${dockerfile}")
+    //   sh 'pwd ; ls -la'
+//
+  //  }
+   // stage ('Login to github registry')
+   // {
+    // sh (" sudo -u dev  gcloud auth configure-docker")
+  // }
+    // stage ('Build Docker Image')
+    {
+       sh ("sudo -u dev docker build -t ${registryUrl}/${serviceName}:${imageTag} -f ${dockerfile} . ")
+   // }
+      docker.withRegistry('https://registry.hub.docker.com', 'git') {            
+     docker.image("${registryUrl}/${serviceName}/${DOCKER_IMAGE}:${imageTag}").push()        
+       }    
+
+
+    // stage('Push Docker Image To ECR')
+    // {
+      
+     // sh( "sudo -u dev docker push ${registryUrl}/${serviceName}:${imageTag}")
+
+   // }
+    
+    stage ("Deploy ${serviceName} to ${branchName} Enviroment")
+    {
+     sh ("sudo -u dev  helm upgrade --install -n ${namespace} ${serviceName} ${helmDir} --set image.repository=${registryUrl}/${serviceName} --set image.Tag=${imageTag} --set namespace=${namespace}")
+      sh("sudo -u dev kubectl -n ${namespace} rollout status deploy/${serviceName}")
+      }
+
+ 
+stage('Remove local images') 
+ {
+    // remove docker images
+    sh("sudo -u dev docker rmi -f ${serviceName}:${imageTag}")
+    sh("sudo -u dev docker rmi -f ${registryUrl}/${serviceName}:${imageTag}")
+  }
+      
+      
+//  stage ('cleanup')
+//  {
+//  cleanWs()
+// }
+
+}
+
+
+def notifyBuild(String buildStatus = 'STARTED') {
+  // build status of null means successful
+  buildStatus =  buildStatus ?: 'SUCCESSFUL'
+  // Default values
+  def colorName = 'RED'
+  def colorCode = '#FF0000'
+  def subject = "${buildStatus}: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'"
+  def summary = "${subject} (${env.BUILD_URL})"
+  // Override default values based on build status
+  if (buildStatus == 'STARTED') {
+    color = 'YELLOW'
+    colorCode = '#FFFF00'
+  } else if (buildStatus == 'SUCCESSFUL') {
+    color = 'GREEN'
+    colorCode = '#00FF00'
+  } else {
+    color = 'RED'
+    colorCode = '#FF0000'
+  }
+ // Send notifications
+    slackSend (color: colorCode, message: summary)
+
+}
