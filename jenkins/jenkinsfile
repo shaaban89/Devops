@@ -10,7 +10,7 @@ def namespace       =  "dev"
 def helmDir         =  "/home/dev/Devops/helm_charts/"
 def dockerfile      =  "Dockerfile"
 
-node("etmanaplus") {
+node("wordpress-dev") {
     try {
         // Notification for build start
         notifyBuild('STARTED')
