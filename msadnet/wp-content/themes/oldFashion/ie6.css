@@ -1,0 +1,141 @@
+
+
+/* ******************************
+		FIXs FOR IE6 or Lower
+   ****************************** */
+
+
+#page-wrraper {
+	width: 1000px;
+	margin: 0 auto;
+	background: #000 url('images/wrrap-bg.jpg') no-repeat fixed;
+}
+
+/* TOP-META */
+
+#top-meta h2 {
+	width: 70px;
+	height: 28px;
+	margin: 1px 54px 0 0 ;
+	background: transparent url('images/meta-h2.png') no-repeat;
+}
+
+#top-meta ul li a {
+	background: transparent url('images/meta-list.png') no-repeat right;
+	padding: 0 18px 0 0;
+	color: #bbbcb8;
+  }
+  #top-meta ul li a:hover {
+	      background: transparent url('images/meta-list-hover.png') no-repeat right;
+		  color: #10d5e1;  
+	  }
+/* TOP-META */
+
+/* ABOUT */
+
+#about h2 {
+	width: 79px;
+	height: 28px;
+	margin: 0 118px 0 0;
+	background: transparent url('images/about-h2.png') no-repeat;
+}
+
+#about a.more {
+	float: none;
+	padding:0;
+	color: #ea1177;
+}
+
+/* ABOUT */
+
+/* LAST-ENTRY */
+
+#last-entry{
+	position: absolute;
+	right: 600px;
+}
+
+#last-entry ul {
+	padding: 10px 8px 0 5px;
+	width: 320px;
+}
+
+#last-entry h2 {
+	width: 68px;
+	height: 27px;
+	margin: 0 auto;
+	background: transparent url('images/last-h2.png') no-repeat;
+}
+
+#last-entry ul li {
+	font: 13px Tahoma;
+	margin-bottom: 5px;
+	text-align: justify;
+}
+
+/* LAST-ENTRY*/
+
+/* HEADER */
+
+#twitter:hover {
+	background-position: bottom;
+	padding-bottom: 1px;
+}
+
+ul#navbar {
+	padding: 0 12px 0 0;
+}
+
+#searchText {
+	height: 26px;
+	width: 132px;
+	background:transparent;
+	border: none;
+	line-height: 24px;
+	font: 14px Tahoma, Verdana, Arial, Serif;
+	color: #f17eb4;
+	padding: 6px 10px 0 8px;
+	margin-left: 3px;
+}
+
+#searchBotton {
+	border: none;
+	width: 32px;
+	height: 18px;
+	background: transparent url('images/searchbotton.png') no-repeat;
+	cursor: pointer;
+	margin-bottom: 8px;
+}
+
+
+/* HEADER */
+
+/* SIDEBAR */
+
+#pages ul {
+	margin-bottom: 0;
+}
+
+.widget {
+	margin-bottom: 0;
+}
+.widget ul li {
+	background: transparent url('images/widget-list-hover.png') no-repeat 268px;
+}
+
+/* SIDEBAR */
+
+/* POSTS */
+
+.entry ul {
+	list-style-image: none;
+	padding-right: 30px;
+}
+
+/* POSTS */
+
+/* FOOTER */
+
+#footer {
+	margin: 10px 0 4px;
+}

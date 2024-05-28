@@ -1,0 +1,143 @@
+
+
+/* ***********************
+		FIXs FOR IE7
+   *********************** */
+
+
+#page-wrraper {
+	width: 1000px;
+	margin: 0 auto;
+	background: transparent url('images/wrrap-bg.jpg') no-repeat fixed;
+}
+
+
+/* TOP META */
+
+#top-meta h2 {
+	width: 70px;
+	height: 28px;
+	margin: 6px 54px 6px 0 ;
+	background: transparent url('images/meta-h2.png') no-repeat;
+}
+
+#top-meta ul li {
+	font: 14px Tahoma;
+	margin-bottom: 3px;
+	background: transparent url('images/meta-list.png') no-repeat right;
+	padding: 0 18px 0 0;
+	color: #bbbcb8;
+  }
+  #top-meta ul li:hover {
+	      background: transparent url('images/meta-list-hover.png') no-repeat right;
+		  color: #10d5e1;  
+	  }
+#top-meta ul li a, #top-meta ul li a:hover {
+	background: none;
+}
+	  
+/* TOP META */
+
+/* ABOUT */
+
+#about h2 {
+	width: 79px;
+	height: 28px;
+	margin: 6px 118px 6px 0;
+	background: transparent url('images/about-h2.png') no-repeat;
+}
+
+#about a.more {
+	color: #ea1177;
+	float: none;
+	padding:0;
+}
+
+/* ABOUT */
+
+/* LAST-ENTRY */
+
+#last-entry{
+	position: absolute;
+	right: 600px;
+}
+
+#last-entry ul {
+	padding: 10px 8px 0 5px;
+	width: 320px;
+}
+
+#last-entry ul li {
+	font:normal 13px Tahoma;
+	margin-bottom: 5px;
+	padding: 0 18px 0;
+	text-align: justify;
+	background: transparent url('images/last-list.png') no-repeat right;
+	}
+	#last-entry ul li:hover {
+			background: transparent url('images/last-list-hover.png') no-repeat right;
+		}
+
+#last-entry ul li a {
+	background: none;
+	color: #bbbcb8;
+  }
+  #last-entry ul li a:hover {
+	      background: none;
+		  color: #10d5e1;  
+	  }
+
+/* LAST-ENTRY*/
+
+/* HEADER */
+
+#searchBotton {
+	border: none;
+	width: 32px;
+	height: 18px;
+	background: transparent url('images/searchbotton.png') no-repeat;
+	cursor: pointer;
+	margin-bottom: 8px;
+}
+
+/* HEADER */
+
+/* POSTS */
+
+.post-wrap h2.post-title {
+	padding: 6px 22px 3px 0;
+	font: bold 26px Arial, Georgia, Verdana, Srif;
+	margin-bottom: 8px;
+	background: transparent url('images/post-title.png') no-repeat right;
+	}
+	.post-wrap h2.post-title:hover {
+		background: transparent url('images/post-title-hover.png') no-repeat right;
+	}
+	
+.post-wrap h2.post-title a {
+	color: #7a7a7a;
+	background: none;
+	}
+	.post-wrap h2.post-title a:hover {
+			color: #088999;
+			border-bottom: 1px dashed #146c77;
+			background: none;
+		}
+		
+.top-meta .author, .top-meta .date {
+	background: none;
+	padding: 0;
+}
+
+.entry ul {
+	padding-right: 30px;
+}
+
+/* POSTS */
+
+/* FOOTER */
+
+#footer {
+	padding: 2px 24px 4px;
+	border-top: 1px solid #202020;
+}

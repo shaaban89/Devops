@@ -1,0 +1,22 @@
+
+/* ***********************
+		FIXs FOR IE8
+   *********************** */
+
+
+#page-wrraper {
+	width: 1000px;
+	margin: 0 auto;
+	background: transparent url('images/wrrap-bg.jpg') no-repeat fixed;
+}
+
+#searchBotton {
+	border: none;
+	width: 32px;
+	height: 18px;
+	background: transparent url('images/searchbotton.png') no-repeat;
+	cursor: pointer;
+	margin-bottom: -4px;
+}
+
+/* meta infos */
