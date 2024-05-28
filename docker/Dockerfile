@@ -20,6 +20,8 @@ RUN apt-get update && apt-get install -y \
 # Set the working directory
 WORKDIR /var/www/html
 
+COPY src/msadnet .
+
 # Expose port 80
 EXPOSE 80
 
