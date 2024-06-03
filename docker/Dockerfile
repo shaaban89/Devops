@@ -11,8 +11,8 @@ RUN apt-get update && apt-get install -y \
     libpng-dev \
     libzip-dev \
     && rm -rf /var/lib/apt/lists/* \
-    && docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-install -j$(nproc) gd mysqli zip
+    // && docker-php-ext-configure gd --with-freetype --with-jpeg \
+    // && docker-php-ext-install -j$(nproc) gd mysqli zip
 
 # Optionally, you can perform additional customizations here
 # For example, you might want to configure Apache/Nginx or install more PHP extensions
