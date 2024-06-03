@@ -1,5 +1,5 @@
 def branchName      =  "main"
-def gitUrl          =  "git@github.com:shaaban89/Devops.git"
+def gitUrl          =  "https://github.com/shaaban89/Devops.git"
 def gitUrlCode      =  "git@github.com:shaaban89/msadnet"
 def serviceName     =  "wordpress-dev"
 def EnvName         =  "wordpress-env"
