@@ -91,13 +91,14 @@ node("wordpress-dev") {
             cleanWs()
         }
 
-    } catch (Exception e) {
+    //}
+//catch (Exception e) {
         // Handle any exceptions that occur during the stages
-        echo "Caught an exception: ${e.message}"
-        currentBuild.result = 'FAILURE'
-        notifyBuild('FAILED')
-    } finally {
+      //  echo "Caught an exception: ${e.message}"
+       // currentBuild.result = 'FAILURE'
+      //  notifyBuild('FAILED')
+  //  } finally {
         // Ensure final notification is sent
-        notifyBuild(currentBuild.result ?: 'SUCCESS')
-    }
+    //    notifyBuild(currentBuild.result ?: 'SUCCESS')
+   // }
 }
