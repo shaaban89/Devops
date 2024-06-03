@@ -11,17 +11,17 @@ def helmDir         =  "/home/dev/Devops/helm_charts/"
 def dockerfile      =  "Dockerfile"
 
 // Define the notifyBuild function
-def notifyBuild(String status) {
-    def subject = "${status}: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'"
-    def summary = "${subject} (${env.BUILD_URL})"
-    def details = "Build result: ${currentBuild.result ?: 'SUCCESS'}"
+// def notifyBuild(String status) {
+   // def subject = "${status}: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'"
+    // def summary = "${subject} (${env.BUILD_URL})"
+   // def details = "Build result: ${currentBuild.result ?: 'SUCCESS'}"
     
-    emailext (
-        subject: subject,
-        body: "${summary}\n\n${details}",
-        recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']]
-    )
-}
+   // emailext (
+     //   subject: subject,
+      //  body: "${summary}\n\n${details}",
+       // recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']]
+    //)
+ // }
 
 node("wordpress-dev") {
     try {
