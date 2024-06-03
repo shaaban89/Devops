@@ -12,21 +12,21 @@ def dockerfile      =  "Dockerfile"
 
 // Define the notifyBuild function
 // def notifyBuild(String status) {
-   // def subject = "${status}: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'"
-    // def summary = "${subject} (${env.BUILD_URL})"
-   // def details = "Build result: ${currentBuild.result ?: 'SUCCESS'}"
+//     def subject = "${status}: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'"
+//     def summary = "${subject} (${env.BUILD_URL})"
+//     def details = "Build result: ${currentBuild.result ?: 'SUCCESS'}"
     
-   // emailext (
-     //   subject: subject,
-      //  body: "${summary}\n\n${details}",
-       // recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']]
-    //)
- // }
+//     emailext (
+//         subject: subject,
+//         body: "${summary}\n\n${details}",
+//         recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']]
+//     )
+// }
 
 node("wordpress-dev") {
     try {
         // Notification for build start
-        notifyBuild('STARTED')
+        // notifyBuild('STARTED')
 
         stage('Prepare Workspace') {
             // Change the ownership of the workspace to the 'dev' user
@@ -91,14 +91,13 @@ node("wordpress-dev") {
             cleanWs()
         }
 
-    //}
-//catch (Exception e) {
+    } catch (Exception e) {
         // Handle any exceptions that occur during the stages
-      //  echo "Caught an exception: ${e.message}"
-       // currentBuild.result = 'FAILURE'
-      //  notifyBuild('FAILED')
-  //  } finally {
+        echo "Caught an exception: ${e.message}"
+        currentBuild.result = 'FAILURE'
+        // notifyBuild('FAILED')
+    } finally {
         // Ensure final notification is sent
-    //    notifyBuild(currentBuild.result ?: 'SUCCESS')
-   // }
-// }
+        // notifyBuild(currentBuild.result ?: 'SUCCESS')
+    }
+}
