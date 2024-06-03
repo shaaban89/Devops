@@ -10,6 +10,19 @@ def namespace       =  "dev"
 def helmDir         =  "/home/dev/Devops/helm_charts/"
 def dockerfile      =  "Dockerfile"
 
+// Define the notifyBuild function
+def notifyBuild(String status) {
+    def subject = "${status}: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'"
+    def summary = "${subject} (${env.BUILD_URL})"
+    def details = "Build result: ${currentBuild.result ?: 'SUCCESS'}"
+    
+    emailext (
+        subject: subject,
+        body: "${summary}\n\n${details}",
+        recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']]
+    )
+}
+
 node("wordpress-dev") {
     try {
         // Notification for build start
@@ -85,23 +98,6 @@ node("wordpress-dev") {
         notifyBuild('FAILED')
     } finally {
         // Ensure final notification is sent
-        notifyBuild(currentBuild.result ?: 'SUCCESSFUL')
+        notifyBuild(currentBuild.result ?: 'SUCCESS')
     }
 }
-
-//def notifyBuild(String buildStatus = 'STARTED') {
-    // build status of null means successful
-  //  buildStatus = buildStatus ?: 'SUCCESSFUL'
-    // Default values
-    //def colorCode = '#FF0000'
-    //def subject = "${buildStatus}: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'"
-    //def summary = "${subject} (${env.BUILD_URL})"
-    // Override default values based on build status
-    //if (buildStatus == 'STARTED') {
-        //colorCode = '#FFFF00'
-    //} else if (buildStatus == 'SUCCESSFUL') {
-        //colorCode = '#00FF00'
-    //}
-    // Send notifications
-    //slackSend(color: colorCode, message: summary)
-//}
