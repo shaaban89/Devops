@@ -73,7 +73,7 @@ node("wordpress-dev") {
         }
 
         stage('Build Docker Image') {
-            sh "sudo -u dev docker build -t ${serviceName}:${imageTag} -f ${dockerfile} ."
+            sh "sudo -u dev docker build -t ${serviceName}:${imageTag} -f ${dockerfile} /home/dev/workspace/docker"
         }
 
         stage('Push Docker Image') {
