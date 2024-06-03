@@ -1,12 +1,9 @@
-
 def branchName      =  "main"
 def gitUrl          =  "git@github.com:shaaban89/Devops.git"
-def gitUrlCode      =  "git@github.com:shaaban89/msadnet"
 def serviceName     =  "wordpress-dev"
 def EnvName         =  "wordpress-env"
 def imageTag        =  "${EnvName}-${BUILD_NUMBER}"
 def registryUrl     =  "https://registry.hub.docker.com"
-def k8sContext      =  "wordpress-dev"
 def namespace       =  "dev"
 def helmDir         =  "/home/dev/Devops/helm_charts/"
 def dockerfile      =  "Dockerfile"
@@ -49,18 +46,26 @@ node("wordpress-dev") {
         }
 
         stage('Get the App Code') {
+            // Ensure SSH key setup
+            sh """
+            sudo -u dev sh -c '
+                ssh-keyscan github.com >> ~/.ssh/known_hosts
+                eval \$(ssh-agent -s)
+                ssh-add ~/.ssh/id_rsa
+            '
+            """
+
             // Run all commands as the 'dev' user
             sh """
             sudo -u dev sh -c '
                 whoami
-                ssh-keyscan github.com >> ~/.ssh/known_hosts
                 cd ${env.WORKSPACE}
                 if [ ! -d .git ]; then
                     git init
                     git remote add origin ${gitUrl}
                 fi
                 git fetch origin
-                git reset --hard origin/${branchName}
+                git reset --hard origin/${branchName} || git checkout -b ${branchName} origin/${branchName}
                 pwd
                 ls -la
             '
@@ -104,3 +109,4 @@ node("wordpress-dev") {
         // notifyBuild(currentBuild.result ?: 'SUCCESS') (commented out for now)
     }
 }
+
