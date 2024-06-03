@@ -1,5 +1,6 @@
+
 def branchName      =  "main"
-def gitUrl          =  "https://github.com/shaaban89/Devops.git"
+def gitUrl          =  "git@github.com:shaaban89/Devops.git"
 def gitUrlCode      =  "git@github.com:shaaban89/msadnet"
 def serviceName     =  "wordpress-dev"
 def EnvName         =  "wordpress-env"
@@ -10,7 +11,7 @@ def namespace       =  "dev"
 def helmDir         =  "/home/dev/Devops/helm_charts/"
 def dockerfile      =  "Dockerfile"
 
-// Define the notifyBuild function
+// Define the notifyBuild function (commented out for now)
 // def notifyBuild(String status) {
 //     def subject = "${status}: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'"
 //     def summary = "${subject} (${env.BUILD_URL})"
@@ -25,7 +26,7 @@ def dockerfile      =  "Dockerfile"
 
 node("wordpress-dev") {
     try {
-        // Notification for build start
+        // Notification for build start (commented out for now)
         // notifyBuild('STARTED')
 
         stage('Prepare Workspace') {
@@ -52,12 +53,14 @@ node("wordpress-dev") {
             sh """
             sudo -u dev sh -c '
                 whoami
-                cd /home/dev && git pull
+                ssh-keyscan github.com >> ~/.ssh/known_hosts
                 cd ${env.WORKSPACE}
-                git init
-                git remote add origin ${gitUrl}
+                if [ ! -d .git ]; then
+                    git init
+                    git remote add origin ${gitUrl}
+                fi
                 git fetch origin
-                git checkout -b ${branchName} --track origin/${branchName}
+                git reset --hard origin/${branchName}
                 pwd
                 ls -la
             '
@@ -95,9 +98,9 @@ node("wordpress-dev") {
         // Handle any exceptions that occur during the stages
         echo "Caught an exception: ${e.message}"
         currentBuild.result = 'FAILURE'
-        // notifyBuild('FAILED')
+        // notifyBuild('FAILED') (commented out for now)
     } finally {
         // Ensure final notification is sent
-        // notifyBuild(currentBuild.result ?: 'SUCCESS')
+        // notifyBuild(currentBuild.result ?: 'SUCCESS') (commented out for now)
     }
 }
