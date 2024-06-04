@@ -7,7 +7,7 @@ def registryUrl     =  "https://registry.hub.docker.com"
 def namespace       =  "dev"
 def helmDir         =  "/home/dev/Devops/helm_charts/"
 def dockerfile      =  "Dockerfile"
-def dockerhandle    =  "shaaban7"
+def dockerHandle    =  "shaaban7"
 
 // Define the notifyBuild function (commented out for now)
 // def notifyBuild(String status) {
@@ -74,12 +74,12 @@ node("wordpress-dev") {
         }
        
         stage('Build Docker Image') {
-            sh "sudo -u dev docker build -t ${dockerhandle}/${serviceName}:${imageTag} -f ${env.WORKSPACE}/docker/${dockerfile} ."
+            sh "sudo -u dev docker build -t ${dockerHandle}/${serviceName}:${imageTag} -f ${env.WORKSPACE}/docker/${dockerfile} ."
         }
 
         stage('Push Docker Image') {
             docker.withRegistry(registryUrl, 'dockerhub-credentials') {
-                docker.image("{dockerhandle}/${serviceName}:${imageTag}").push()
+                docker.image("{dockerHandle}/${serviceName}:${imageTag}").push()
             }
         }
 
