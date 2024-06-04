@@ -5,7 +5,7 @@ def EnvName         =  "wordpress-env"
 def imageTag        =  "${EnvName}-${BUILD_NUMBER}"
 def registryUrl     =  "https://registry.hub.docker.com"
 def namespace       =  "dev"
-def helmDir         =  "/home/dev/Devops/helm_charts/"
+def helmDir         =  "/home/dev/workspace/wordpress-dev/helm_chart/"
 def dockerfile      =  "Dockerfile"
 def dockerHandle    =  "shaaban7"
 
