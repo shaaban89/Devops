@@ -85,14 +85,14 @@ node("wordpress-dev") {
 
         stage('Deploy to Kubernetes') {
             sh """
-            sudo -u dev /usr/local/bin/helm upgrade --install -n ${namespace} ${serviceName} ${helmDir} --set image.repository=${registryUrl}/shaaban7/${serviceName} --set image.tag=${imageTag} --set namespace=${namespace}
+            sudo -u dev /usr/local/bin/helm upgrade --install -n ${namespace} ${serviceName} ${helmDir} --set image.repository=${registryUrl}/${serviceName} --set image.tag=${imageTag} --set namespace=${namespace}
             sudo -u dev kubectl -n ${namespace} rollout status deploy/${serviceName}
             """
         }
 
         stage('Remove Local Images') {
-            sh "sudo -u dev docker rmi -f shaaban/${serviceName}:${imageTag}"
-            sh "sudo -u dev docker rmi -f ${registryUrl}/shaaban7/${serviceName}:${imageTag}"
+            sh "sudo -u dev docker rmi -f ${serviceName}:${imageTag}"
+            sh "sudo -u dev docker rmi -f ${registryUrl}/${serviceName}:${imageTag}"
         }
 
         // Clean workspace if needed
