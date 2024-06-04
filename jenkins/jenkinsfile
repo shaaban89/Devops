@@ -74,12 +74,13 @@ node("wordpress-dev") {
         }
        
         stage('Build Docker Image') {
-            sh "sudo -u dev docker build -t ${dockerhandle}/${serviceName}:${imageTag} -f ${env.WORKSPACE}/docker/${dockerfile} ."
+            sh "sudo -u dev docker build -t ${serviceName}:${imageTag} -f ${env.WORKSPACE}/docker/${dockerfile} ."
+            docker tag ${serviceName}:${imageTag}  ${dockerhandle}/${serviceName}:${imageTag}
         }
 
         stage('Push Docker Image') {
             docker.withRegistry(registryUrl, 'dockerhub-credentials') {
-                docker.image("${serviceName}:${imageTag}").push()
+                docker.image("${dockerhandle}/${serviceName}:${imageTag}").push()
             }
         }
 
