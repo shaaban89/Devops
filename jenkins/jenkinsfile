@@ -85,7 +85,7 @@ node("wordpress-dev") {
 
         stage('Deploy to Kubernetes') {
             sh """
-            sudo -u dev /usr/local/bin/helm upgrade --install -n ${namespace} ${serviceName} ${helmDir} --set image.repository=${registryUrl}/${serviceName} --set image.tag=${imageTag} --set namespace=${namespace}
+            sudo -u dev /usr/local/bin/helm upgrade --install -n ${namespace} ${serviceName} ${helmDir} --set image.repository=${registryUrl}/${dockerHandle}/${serviceName} --set image.tag=${imageTag} --set namespace=${namespace}
             sudo -u dev kubectl -n ${namespace} rollout status deploy/${serviceName}
             """
         }
