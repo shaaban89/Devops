@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: wordpress
-          image: "{{ .Values.image.repository }}:{{ .Values.image.Tag }}"
+          image: "{{ .Values.image.repository }}":"{{ .Values.image.Tag }}"
           ports:
           - containerPort: {{ .Values.port }}
           volumeMounts:
