@@ -19,13 +19,13 @@ spec:
           image: "{{ .Values.image.repository }}:{{ .Values.image.Tag }}"
           ports:
           - containerPort: {{ .Values.port }}
-          volumeMounts:
-          - name: wordpress-vol
-            mountPath: /var/www/html/wp-config-sample.php
-            readOnly: true
-      volumes:
-      - name: wordpress-vol
-        configMap:
-          name: wordpress-config
+         # volumeMounts:
+         # - name: wordpress-vol
+          #  mountPath: /var/www/html/wp-config-sample.php
+           # readOnly: true
+     # volumes:
+     # - name: wordpress-vol
+      #  configMap:
+       #   name: wordpress-config
 
           
