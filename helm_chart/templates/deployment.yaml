@@ -21,7 +21,7 @@ spec:
           - containerPort: {{ .Values.port }}
           volumeMounts:
           - name: wordpress-vol
-            mountPath: /var/www/html/wp-config.php
+            mountPath: /var/www/html/wp-config-sample.php
             readOnly: true
       volumes:
       - name: wordpress-vol
