@@ -1,6 +1,7 @@
 replicaCount: 1
 image:
   repository: shaaban7/wordpress-dev
+  tag: ""
 port: 80
 name: wordpress-dev
 domain: dev.exahost.com
