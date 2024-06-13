@@ -4,16 +4,16 @@
 
 // ** إعدادات قاعدة البيانات - ينمكنك الحصول على هذه المعلومات من مستضيفك ** //
 /** اسم قاعدة بيانات ووردبريس */
-define('DB_NAME', 'msadnet_boos');
+define('DB_NAME', 'wordpress-dev');
 
 /** اسم المستخدم لقاعدة البيانات */
-define('DB_USER', 'msadnet_net');
+define('DB_USER', 'dev');
 
 /** كلمة المرور لقاعدة البيانات */
-define('DB_PASSWORD', '1hUbN6a25p');
+define('DB_PASSWORD', 'password');
 
 /** عنوان خادم قاعدة البيانات */
-define('DB_HOST', 'localhost');
+define('DB_HOST', 'mysql-0');
 
 /** ترميز قاعدة البيانات */
 define('DB_CHARSET', 'utf8');
