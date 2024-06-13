@@ -3,7 +3,7 @@ kind: Service
 metadata:
   name: wordpress-dev
   labels:
-    app: wordpress-dev
+    app: wordpress
 spec:
   type: NodePort
   ports:
@@ -11,4 +11,4 @@ spec:
     targetPort: {{ .Values.port }}
     nodePort: 30007
   selector:
-    app: wordpress
+    app: wordpress-dev
