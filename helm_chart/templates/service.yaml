@@ -3,7 +3,7 @@ kind: Service
 metadata:
   name: wordpress-dev
   labels:
-    app: wordpress
+    app: wordpress-dev
 spec:
   type: NodePort
   ports:
